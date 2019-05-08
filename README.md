@@ -1,4 +1,4 @@
-360-to-cubemap
+360toCubeMapTrip
 
 El proyecto consiste en hacer convertir una fotografía de 360° a un mapeo en cubo. Se utilizara para mostrar de manera real algunos lugares o panoramas y se pueda explorar en el. Dando un ejemplo, "Google maps" utiliza un método similar para mostrar lugares, calles y avenidas.
 
