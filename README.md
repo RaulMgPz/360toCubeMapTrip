@@ -8,7 +8,7 @@ Utilizando las herramientas: Xampp y Marzipano.
 
 XAMPP es un servidor independiente de código abierto, que consiste principalmente en la base de datos MySQL, el servidor Web Apache y los intérpretes para lenguajes de script: PHP y Perl. El programa está liberado bajo la licencia GNU y actúa como un servidor Web libre, fácil de usar y capaz de interpretar páginas dinámicas.
 
-Marzipano es una herramienta que genera un recorrido virtual desde un conjunto de panoramas y le permite exportarlo como una aplicación web que puede implementarse tal como está o usarse como repetitivo para proyectos más avanzados. Requiere Firefox o Chrome.
+Marzipano es una herramienta que genera un recorrido virtual desde un conjunto de panoramas y le permite exportarlo como una aplicación web que puede implementarse tal como está o usarse como repetitivo para proyectos más avanzados. Requiere Firefox.
 
 Utilizando estas dos herramientas, desarrollaremos un mundo virtual en donde se representara las imágenes de la manera que queremos expresarla.
 
