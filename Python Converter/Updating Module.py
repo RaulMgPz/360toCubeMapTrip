@@ -20,6 +20,7 @@ while saver in restriction:
     saver=input("Where do you want to save?...\nWrite a second path...\n")
 
 imagesfiles = []
+zoomslist = []
 imagesDirection = os.walk(path)
 file_extension = ".png"
 os.mkdir('360transform')
@@ -198,7 +199,7 @@ for root, dirs,files in imagesDirection:
             os.mkdir('z{}'.format(i))
         print("Zooms binder done")
         time.sleep(5)
-
+        zoomslist.append(nuom+1)
 
         #---------------------Zooms Crop-------------------------------------
         for photo in range(1,7):
@@ -306,6 +307,54 @@ for root, dirs,files in imagesDirection:
                     shutil.move('{}'.format(zooms),'Carpet {}'.format(infile))
         shutil.move('Carpet {}'.format(infile),'360transform')
 
+    print(zoomslist, "\n")
+
+    none = 256
+    with open('data.js', 'w') as json:
+
+        json.write('var APP_DATA = {\n')
+        json.write('"scenes": [\n')
+
+        for n, i in enumerate(files):
+
+            json.write('\n{')
+            json.write('"id": "{}-{}",\n'.format(n,i))
+            json.write('"name": "{}", \n'.format(i))
+            json.write('"levels": [\n        {\n')
+            json.write('           "tileSize": {},\n'.format(none))
+            json.write('           "Size": {},\n'.format(none))
+            json.write('           "fallbackOnly": true\n        },\n')
+
+            for a in zoomslist:
+                if a > 1:
+                    for idea in range(1,a+1):
+                        json.write('         {\n')
+                        json.write('           "tileSize": {},\n'.format(none*2))
+                        json.write('           "Size": {},\n'.format(512*idea))
+                        json.write('         },\n')
+
+                elif a == 1:
+                    json.write('         {\n')
+                    json.write('           "tileSize": {},\n'.format(512))
+                    json.write('           "Size": {},\n'.format(512))
+                    json.write('         },\n')
+
+
+                json.write("     ],\n")
+
+                #------ Zooms ------
+                json.write('     "faceSize": {},\n'.format(512*a))
+                json.write('     "initialViewParameters": {\n')
+                json.write('     "pitch": 0,\n')
+                json.write('     "yaw": 0,\n')
+                json.write('     "fov": 1.5707963267948966\n      },\n')
+
+                json.write('"linkHotspots": []\n')
+                json.write('"infoHotspots": []\n')
+                json.write('     },\n')
+                break
+        json.write('\n]\n}')
+
     print("delet process.... ")
     os.mkdir('delet')
     shutil.move('cube.png','delet')
@@ -320,6 +369,8 @@ for root, dirs,files in imagesDirection:
         print("Fail")
 
     try:
+        time.sleep(1)
+        shutil.move('data.js','360transform')
         time.sleep(1)
         shutil.move('360transform',saver)
     except:
