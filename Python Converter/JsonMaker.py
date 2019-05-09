@@ -1,11 +1,5 @@
 from __future__ import print_function
-#from PIL import Image
-#from numpy import clip
-#from math import pi,atan2,hypot,floor
 import os
-#import shutil
-#import time
-
 
 print("Wirte a direction as the example or write a name..")
 path=input("Example.... C:\\name1\\name2\\....\n")
