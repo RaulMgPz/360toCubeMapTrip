@@ -5,6 +5,7 @@ print("Wirte a direction as the example or write a name..")
 path=input("Example.... C:\\name1\\name2\\....\n")
 
 imagesfiles = []
+cordenadas = ['up', 'down', 'left', 'right', 'plus', 'minus']
 imagesDirection = os.walk(path)
 
 #------------Lista De imagenes-------------
@@ -17,90 +18,86 @@ for root, dirs, files in imagesDirection:
     for infiles in files:
         (nombreFichero, extension) = os.path.splitext(infiles)
         if (extension == ".jpg"):
-            imagesfiles.append(infiles)
+            imagesfiles.append(nombreFichero)
         elif (extension == ".jpeg"):
-            imagesfiles.append(infiles)
+            imagesfiles.append(nombreFichero)
         elif (extension == ".png"):
-            imagesfiles.append(infiles)
+            imagesfiles.append(nombreFichero)
 
     with open('index.html', 'w') as html:
 
-        print('<!DOCTYPE html>')
-        print('<html>')
-        print('<head>')
-        print('<title>Project Title</title>')
-        print('<meta charset="utf-8">')
-        print('<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">')
-        print('<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui" />')
-        print('<style> @-ms-viewport { width: device-width; } </style>')
-        print('<link rel="stylesheet" href="vendor/reset.min.css">')
-        print('<link rel="stylesheet" href="style.css">')
-        print('</head>')
+        html.write('<!DOCTYPE html>\n')
+        html.write('<html>\n')
+        html.write('<head>\n')
+        html.write('<title>Project Title</title>\n')
+        html.write('<meta charset="utf-8">\n')
+        html.write('<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">\n')
+        html.write('<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui" />\n')
+        html.write('<style> @-ms-viewport { width: device-width; } </style>\n')
+        html.write('<link rel="stylesheet" href="vendor/reset.min.css">\n')
+        html.write('<link rel="stylesheet" href="style.css">\n')
+        html.write('</head>\n')
 
-        print('<body class="multiple-scenes view-control-buttons">')
+        html.write('\n<body class="multiple-scenes view-control-buttons">\n')
 
-        print('<div id="pano"></div>')
+        html.write('\n<div id="pano"></div>\n')
 
-        print('<div id="sceneList">')
-        print('<ul class="scenes">')
-        print()
+        html.write('\n<div id="sceneList">\n')
+        html.write('  <ul class="scenes">\n')
 
-        for emages in imagesfiles:
-            print('\n<a href="#" class="scene" data-id="{}">'.format(emages))
-            print('<li class="text">{}</li>'.format(emages))
-            print('</a>\n')
+        for nfi,nfj in enumerate(imagesfiles):
+            html.write('\n      <a href="#" class="scene" data-id="{}-{}">\n'.format(nfi,nfj))
+            html.write('        <li class="text">{}</li>\n'.format(nfj))
+            html.write('      </a>\n')
 
-#        </ul>
-#        </div>
+        html.write('\n  </ul>\n')
+        html.write('</div>\n')
 
-#        <div id="titleBar">
-#        <h1 class="sceneName"></h1>
-#        </div>
+        html.write('\n<div id="titleBar">\n')
+        html.write('  <h1 class="sceneName"></h1>\n')
+        html.write('</div>\n')
 
-#        <a href="#" id="autorotateToggle">
-#        <img class="icon off" src="img/play.png">
-#        <img class="icon on" src="img/pause.png">
-#        </a>
+        html.write('\n<a href="#" id="autorotateToggle">\n')
+        html.write('  <img class="icon off" src="img/play.png">\n')
+        html.write('  <img class="icon on" src="img/pause.png">\n')
+        html.write('</a>\n')
 
-#        <a href="#" id="fullscreenToggle">
-#        <img class="icon off" src="img/fullscreen.png">
-#        <img class="icon on" src="img/windowed.png">
-#        </a>
+        html.write('\n<a href="#" id="fullscreenToggle">\n')
+        html.write('  <img class="icon off" src="img/fullscreen.png">\n')
+        html.write('  <img class="icon on" src="img/windowed.png">\n')
+        html.write('</a>\n')
 
-#        <a href="#" id="sceneListToggle">
-#        <img class="icon off" src="img/expand.png">
-#        <img class="icon on" src="img/collapse.png">
-#        </a>
+        html.write('\n<a href="#" id="sceneListToggle">\n')
+        html.write('  <img class="icon off" src="img/expand.png">\n')
+        html.write('  <img class="icon on" src="img/collapse.png">\n')
+        html.write('</a>\n')
 
-#        <a href="#" id="viewUp" class="viewControlButton viewControlButton-1">
-#        <img class="icon" src="img/up.png">
-#        </a>
-#        <a href="#" id="viewDown" class="viewControlButton viewControlButton-2">
-#        <img class="icon" src="img/down.png">
-#        </a>
-#        <a href="#" id="viewLeft" class="viewControlButton viewControlButton-3">
-#        <img class="icon" src="img/left.png">
-#        </a>
-#        <a href="#" id="viewRight" class="viewControlButton viewControlButton-4">
-#        <img class="icon" src="img/right.png">
-#        </a>
-#        <a href="#" id="viewIn" class="viewControlButton viewControlButton-5">
-#        <img class="icon" src="img/plus.png">
-#        </a>
-#        <a href="#" id="viewOut" class="viewControlButton viewControlButton-6">
-#        <img class="icon" src="img/minus.png">
-#        </a>
+        for nam, nem in enumerate(cordenadas):
+            if nam == 0:
+                html.write('\n<a href="#" id="viewUp" class="viewControlButton viewControlButton-{}">\n'.format(nam+1))
+            elif nam == 1:
+                html.write('\n<a href="#" id="viewDown" class="viewControlButton viewControlButton-{}">\n'.format(nam+1))
+            elif nam == 2:
+                html.write('\n<a href="#" id="viewLeft" class="viewControlButton viewControlButton-{}">\n'.format(nam+1))
+            elif nam == 3:
+                html.write('\n<a href="#" id="viewRight" class="viewControlButton viewControlButton-{}">\n'.format(nam+1))
+            elif nam == 4:
+                html.write('\n<a href="#" id="viewIn" class="viewControlButton viewControlButton-{}">\n'.format(nam+1))
+            elif nam == 5:
+                html.write('\n<a href="#" id="viewOut" class="viewControlButton viewControlButton-{}">\n'.format(nam+1))
+            html.write('  <img class="icon" src="img/{}.png">\n'.format(nem))
+            html.write('</a>\n')
 
-#        <script src="vendor/es5-shim.js"></script>
-#        <script src="vendor/eventShim.js"></script>
-#        <script src="vendor/classList.js"></script>
-#        <script src="vendor/requestAnimationFrame.js" ></script>
-#        <script src="vendor/screenfull.min.js" ></script>
-#        <script src="vendor/bowser.min.js" ></script>
-#        <script src="vendor/marzipano.js" ></script>
+        html.write('\n<script src="vendor/es5-shim.js"></script>\n')
+        html.write('<script src="vendor/eventShim.js"></script>\n')
+        html.write('<script src="vendor/classList.js"></script>\n')
+        html.write('<script src="vendor/requestAnimationFrame.js" ></script>\n')
+        html.write('<script src="vendor/screenfull.min.js" ></script>\n')
+        html.write('<script src="vendor/bowser.min.js" ></script>\n')
+        html.write('<script src="vendor/marzipano.js" ></script>\n')
 
-#        <script src="data.js"></script>
-#        <script src="index.js"></script>
+        html.write('\n<script src="data.js"></script>\n')
+        html.write('<script src="index.js"></script>\n')
 
-#        </body>
-#        </html>
+        html.write('\n</body>\n')
+        html.write('</html>\n')
