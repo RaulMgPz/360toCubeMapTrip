@@ -8,7 +8,7 @@ imagesfiles = []
 imagesDirection = os.walk(path)
 
 #------------Lista De imagenes-------------
-zoomlist = [1,1,1]
+zoomlist = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
 none = 256
 for root, dirs, files in imagesDirection:
 
@@ -28,14 +28,14 @@ for root, dirs, files in imagesDirection:
         json.write('var APP_DATA = {\n')
         json.write('  "scenes": [\n')
 
-        for n, i in enumerate(files):
+        for n, i in enumerate(imagesfiles):
 
             json.write('    {\n')
             json.write('      "id": "{}-{}",\n'.format(n,i))
             json.write('      "name": "{}", \n'.format(i))
             json.write('      "levels": [\n        {\n')
             json.write('          "tileSize": {},\n'.format(none))
-            json.write('          "Size": {},\n'.format(none))
+            json.write('          "size": {},\n'.format(none))
             json.write('          "fallbackOnly": true\n        },\n')
 
             for a in zoomlist:
@@ -44,8 +44,8 @@ for root, dirs, files in imagesDirection:
                 if zon == 1:
                     json.write('        {\n')
                     json.write('          "tileSize": {},\n'.format(512))
-                    json.write('          "Size": {},\n'.format(512))
-                    json.write('        },\n')
+                    json.write('          "size": {}\n'.format(512))
+                    json.write('        }\n')
 
                 elif zon > 1:
                     for idea in range(1,zon+1):
@@ -57,21 +57,21 @@ for root, dirs, files in imagesDirection:
                 json.write("      ],\n")
 
                 #------ Zooms ------
-                json.write('      "faceSize": {},\n'.format(512*zon))
+                json.write('      "faceSize": {},\n'.format(511*zon))
                 json.write('      "initialViewParameters": {\n')
                 json.write('        "pitch": 0,\n')
                 json.write('        "yaw": 0,\n')
                 json.write('        "fov": 1.5707963267948966\n      },\n')
 
-                json.write('      "linkHotspots": []\n')
+                json.write('      "linkHotspots": [],\n')
                 json.write('      "infoHotspots": []\n')
                 json.write('    },\n')
                 break
         json.write('\n  ],')
-        json.write('  "name": "Project Title",\n')
-        json.write('   "settings": {\n')
+        json.write('\n"name": "Project Title",\n')
+        json.write('  "settings": {\n')
         json.write('    "mouseViewMode": "drag",\n')
         json.write('    "autorotateEnabled": false,\n')
         json.write('    "fullscreenButton": true,\n')
         json.write('    "viewControlButtons": true\n  }')
-        json.write('};')
+        json.write('\n};')
